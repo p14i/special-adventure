@@ -9,7 +9,6 @@ st.subheader("Generate Tweets with generative AI")
 
 # Put your API key in environment variables before running:
 
-os.environ['GOOGLE_API_KEY'] = "AIzaSyDsdkkMNAP1O-REa0QqMOrw2Zd0bl0x9S8"
 
 tweet_template = "Give me {number} tweets on {topic}"
 tweet_prompt = PromptTemplate(
