@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
@@ -7,20 +6,13 @@ from langchain_core.output_parsers import StrOutputParser
 st.header("Tweet Generator")
 st.subheader("Generate Tweets with generative AI")
 
-# Put your API key in environment variables before running:
-
-
-tweet_template = "Give me {number} tweets on {topic}"
-tweet_prompt = PromptTemplate(
-    template=tweet_template,
-    input_variables=["number", "topic"]
-)
-
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
-    temperature=0.7
+    google_api_key=st.secrets["GOOGLE_API_KEY"],
+    temperature=0.7,
 )
 
+tweet_prompt = PromptTemplate.from_template("Give me {number} tweets on {topic}")
 tweet_chain = tweet_prompt | llm | StrOutputParser()
 
 topic = st.text_input("Topic")
